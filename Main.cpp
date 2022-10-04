@@ -36,18 +36,28 @@ int main() {
         cuePos = GetMousePosition();
 
         //check collision circle-rec
-        if(CheckCollisionCircleRec(cuePos, 50, up)) {
+        if(CheckCollisionCircleRec(cuePos, 30, up)) {
             indicator = 1;
-        } else if(CheckCollisionCircleRec(cuePos, 50, down)){
+        } else if(CheckCollisionCircleRec(cuePos, 30, down)){
             indicator = 1;
-        } else if(CheckCollisionCircleRec(cuePos, 50, left)){
+        } else if(CheckCollisionCircleRec(cuePos, 30, left)){
             indicator = 1;
-        } else if(CheckCollisionCircleRec(cuePos, 50, right)){
+        } else if(CheckCollisionCircleRec(cuePos, 30, right)){
             indicator = 1;
         } else {
             indicator = 0;
         }
         
+        //check collision circle-circle cueball and hole
+        if(CheckCollisionCircles({50.0f,50.0f}, 50, cuePos, 30)) {
+            cuePos = {300.0f, 300.0f};
+        } else if (CheckCollisionCircles({50.0f,550.0f}, 50, cuePos, 30)) {
+            cuePos = {300.0f, 300.0f};
+        } else if (CheckCollisionCircles({750.0f,50.0f}, 50, cuePos, 30)) {
+            cuePos = {300.0f, 300.0f};
+        } else if (CheckCollisionCircles({750.0f,550.0f}, 50, cuePos, 30)) {
+            cuePos = {300.0f, 300.0f};
+        }
 
         BeginDrawing();
 
