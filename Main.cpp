@@ -1,17 +1,33 @@
 #include <raylib.h>
 #include <iostream>
 #include <cmath>
+#include <raymath.h>
 
+struct Ball
+{
+    Vector2 position;
+    Color color = BLUE;
+};
+
+const int ballCount = 3;
 int main() {
-    Vector2 cuePos{300.0f, 300.0f};
+    Ball *billiardBall = new Ball[ballCount];
+
+    billiardBall[0].position = {500,300};
+    billiardBall[1].position = {550, 250};
+    billiardBall[2].position = {550, 350};
+
+    Vector2 cuePos = {300.0f, 300.0f};
     Vector2 initialPos;
     Vector2 dragPos;
     float fMagnitude;
     float timestep = GetFrameTime(); //multiply to movement
+
     Rectangle up = {125, 0, 550, 50};
     Rectangle down = {125, 550, 550, 50};
     Rectangle left = {0, 125, 50, 350};
     Rectangle right = {750, 125, 50, 350};
+
     int indicator;
     
 
@@ -80,13 +96,16 @@ int main() {
         DrawCircleV(cuePos, 30, WHITE);
 
         //Billiard Balls
-        DrawCircle(500, 300, 30, BLUE);
-        DrawCircle(550, 250, 30, BLUE);
-        DrawCircle(550, 350, 30, BLUE);
+        DrawCircleV(billiardBall[0].position, 30, billiardBall[0].color);
+        DrawCircleV(billiardBall[1].position, 30, billiardBall[1].color);
+        DrawCircleV(billiardBall[2].position, 30, billiardBall[2].color);
 
         DrawText(TextFormat("testcollide: %i", indicator), 10, 40, 20, LIGHTGRAY);
         EndDrawing();
     }
+
+        delete billiardBall;
+
     CloseWindow();
     return 0;
 }
